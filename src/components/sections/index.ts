@@ -1,0 +1,9 @@
+export { Header } from "./Header";
+export { Hero } from "./Hero";
+export { LogoCarousel } from "./LogoCarousel";
+export { About } from "./About";
+export { Experience } from "./Experience";
+export { Projects } from "./Projects";
+export { Testimonials } from "./Testimonials";
+export { Contact } from "./Contact";
+export { Footer } from "./Footer";

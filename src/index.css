@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* Use class-based dark mode (.dark on <html>) instead of prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Google Store-inspired color palette — light mode */
+:root {
+  --background: #ffffff;
+  --foreground: #202124;
+  --card: #ffffff;
+  --card-foreground: #202124;
+  --popover: #ffffff;
+  --popover-foreground: #202124;
+  --primary: #1a73e8;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #202124;
+  --muted: #f1f3f4;
+  --muted-foreground: #4d5156;
+  --accent: #f1f3f4;
+  --accent-foreground: #202124;
+  --destructive: #d93025;
+  --destructive-foreground: #ffffff;
+  --border: #e8eaed;
+  --input: #e8eaed;
+  --ring: #1a73e8;
+}
+
+/* Google Store-inspired — dark mode */
+.dark {
+  --background: #131314;
+  --foreground: #e8eaed;
+  --card: #1e1f20;
+  --card-foreground: #e8eaed;
+  --popover: #1e1f20;
+  --popover-foreground: #e8eaed;
+  --primary: #8ab4f8;
+  --primary-foreground: #131314;
+  --secondary: #1e1f20;
+  --secondary-foreground: #e8eaed;
+  --muted: #28292a;
+  --muted-foreground: #bdc1c6;
+  --accent: #28292a;
+  --accent-foreground: #e8eaed;
+  --destructive: #f28b82;
+  --destructive-foreground: #131314;
+  --border: #3c4043;
+  --input: #3c4043;
+  --ring: #8ab4f8;
+}
+
+@theme inline {
+  --font-sans: "Google Sans", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: "Google Sans Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  /* Reference CSS variables for theming */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground font-sans antialiased;
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* WCAG: visible focus indicators for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skip-to-content link (screen readers & keyboard) */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Mobile frame wrapper for app screenshots - iPhone proportions */
+  .mobile-frame {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 375px; /* iPhone width */
+    aspect-ratio: 375 / 715; /* iPhone height reduced by 12% */
+    padding: 12px;
+    background: #1c1c1e;
+    border-radius: 2.5rem;
+    box-shadow: 
+      0 0 0 1px rgba(0, 0, 0, 0.3),
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
+  .mobile-frame::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8rem;
+    height: 1.5rem;
+    background: #1c1c1e;
+    border-radius: 0 0 1.25rem 1.25rem;
+    z-index: 1;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .mobile-frame-content {
+    width: 100%;
+    height: 100%;
+    max-height: 715px; /* iPhone height reduced by 12% */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 1.75rem;
+    background: #000;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  .mobile-frame-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+    min-height: 100%;
+  }
+
+  .dark .mobile-frame {
+    background: #1c1c1e;
+    box-shadow: 
+      0 0 0 1px rgba(0, 0, 0, 0.5),
+      0 8px 24px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .dark .mobile-frame::before {
+    background: #1c1c1e;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Google-style smooth transitions */
+@layer utilities {
+  .transition-google {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Logo styling — original colors, readable in both modes */
+.logo-brand {
+  opacity: 0.6;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.dark .logo-brand {
+  opacity: 0.85;
+  filter: brightness(1.8) contrast(1.1);
+}
+
