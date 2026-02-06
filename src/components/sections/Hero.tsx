@@ -8,7 +8,7 @@ export function Hero() {
   const { personal, sections } = data;
 
   return (
-    <section className="min-h-[70vh] flex items-center justify-center px-6 pt-20 sm:pt-16 pb-12">
+    <section className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-12">
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,14 +34,14 @@ export function Hero() {
 
           {/* CTA — Google Store style buttons */}
           <motion.div
-            className="flex items-center justify-center gap-3"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.5 }}
           >
             <motion.a
               href="#work"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-medium bg-primary text-primary-foreground rounded-full shadow-sm"
+              className="inline-flex items-center justify-center h-12 px-6 sm:px-8 text-sm font-medium bg-primary text-primary-foreground rounded-full shadow-sm"
               whileHover={{ scale: 1.02, boxShadow: "0 4px 12px rgba(26,115,232,0.3)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 500, damping: 25 }}
@@ -52,7 +52,7 @@ export function Hero() {
               href={personal.links.linkedin || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-medium text-primary border border-border rounded-full hover:bg-accent"
+              className="inline-flex items-center justify-center h-12 px-6 sm:px-8 text-sm font-medium text-primary border border-border rounded-full hover:bg-accent"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 500, damping: 25 }}

@@ -35,23 +35,23 @@ export function LogoCarousel() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="pt-8 pb-14 px-6" aria-label="Companies I've worked with">
+    <section ref={ref} className="pt-8 pb-14 px-4 sm:px-6" aria-label="Companies I've worked with">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="flex items-center justify-between gap-8 sm:gap-12 px-4 sm:px-12"
+          className="flex items-center justify-center flex-wrap gap-6 sm:gap-8 md:gap-12 px-2 sm:px-4 md:px-12"
         >
           {logos.map((logo) => (
             <div
               key={logo.name}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center flex-shrink-0"
             >
               <img
                 src={logo.src}
                 alt={logo.name}
-                className={`h-7 sm:h-8 w-auto max-w-[120px] sm:max-w-[150px] object-contain ${logo.className} select-none pointer-events-none transition-opacity duration-300 hover:opacity-80`}
+                className={`h-6 sm:h-7 md:h-8 w-auto max-w-[90px] sm:max-w-[120px] md:max-w-[150px] object-contain ${logo.className} select-none pointer-events-none transition-opacity duration-300 hover:opacity-80`}
                 draggable={false}
               />
             </div>

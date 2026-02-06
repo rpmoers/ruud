@@ -59,22 +59,22 @@ export function PasswordGate({ children, password }: PasswordGateProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-6">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 sm:px-6 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="w-full max-w-md"
       >
-        <div className="bg-card border border-border rounded-2xl p-8 shadow-lg">
+        <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-lg">
           <div className="flex flex-col items-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
-              <Lock className="h-8 w-8 text-muted-foreground" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+              <Lock className="h-7 w-7 sm:h-8 sm:w-8 text-muted-foreground" />
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight mb-2">
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tight mb-2 text-center">
               Portfolio Protected
             </h1>
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-xs sm:text-sm text-muted-foreground text-center">
               Please enter the password to access this portfolio
             </p>
           </div>

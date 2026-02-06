@@ -14,7 +14,7 @@ export function Testimonials() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section id="testimonials" className="py-24 px-6 bg-secondary/40">
+    <section id="testimonials" className="py-16 sm:py-24 px-4 sm:px-6 bg-secondary/40">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -23,12 +23,12 @@ export function Testimonials() {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
           {/* Section header */}
-          <h2 className="text-3xl sm:text-4xl font-normal tracking-[-0.02em] mb-14">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-[-0.02em] mb-10 sm:mb-14">
             {sections.testimonialsHeading}
           </h2>
 
           {/* Testimonials — Google-style cards */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {testimonials.map((testimonial, index) => (
               <motion.blockquote
                 key={testimonial.id}

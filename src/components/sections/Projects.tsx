@@ -174,18 +174,20 @@ function ProjectDetail({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="fixed inset-0 top-16 z-40 bg-background overflow-y-auto"
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
       {/* Project navigation bar */}
       <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-lg border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between">
           <motion.button
             onClick={onClose}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
             whileHover={{ x: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            <ArrowLeft className="h-4 w-4" />
-            {labels.back}
+            <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">{labels.back}</span>
+            <span className="sm:hidden">Terug</span>
           </motion.button>
 
           {/* Prev / Next */}
@@ -221,13 +223,13 @@ function ProjectDetail({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-          className="max-w-3xl mx-auto px-6 py-16"
+          className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16"
         >
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight mb-2">
             {project.title}
           </h1>
-          <p className="text-lg text-muted-foreground mb-8">{project.subtitle}</p>
+          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">{project.subtitle}</p>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-12">
@@ -237,7 +239,7 @@ function ProjectDetail({
           </div>
 
           {/* Case study sections */}
-          <div className="space-y-12 text-base leading-relaxed">
+          <div className="space-y-8 sm:space-y-12 text-sm sm:text-base leading-relaxed">
             {project.context && (
               <div>
                 <h2 className="text-sm font-medium uppercase tracking-wider text-muted-foreground mb-4">
@@ -391,7 +393,7 @@ export function Projects() {
 
   return (
     <>
-      <section id="work" className="pt-16 pb-24 px-6 scroll-mt-20">
+      <section id="work" className="pt-16 pb-24 px-4 sm:px-6 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div
             ref={ref}
@@ -400,7 +402,7 @@ export function Projects() {
             transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Projects grid — Google Store style text cards */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {projects.map((project, index) => {
                 const color = getCompanyColor(project.company);
                 return (
@@ -414,7 +416,7 @@ export function Projects() {
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
                     whileHover={{ y: -4, scale: 1.01 }}
-                    className={`group cursor-pointer rounded-2xl ${color.bg} p-6 sm:p-8 transition-all duration-300 shadow-sm hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
+                    className={`group cursor-pointer rounded-2xl ${color.bg} p-5 sm:p-6 md:p-8 transition-all duration-300 shadow-sm hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
                     onClick={() => setSelectedIndex(index)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedIndex(index); } }}
                     tabIndex={0}
@@ -427,7 +429,7 @@ export function Projects() {
                     </p>
 
                     {/* Title */}
-                    <h3 className="text-xl sm:text-2xl font-normal tracking-tight text-foreground mb-2 leading-tight">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-normal tracking-tight text-foreground mb-2 leading-tight">
                       {project.title}
                     </h3>
 
