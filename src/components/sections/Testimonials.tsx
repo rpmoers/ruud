@@ -44,15 +44,26 @@ export function Testimonials() {
                 <p className="text-sm leading-relaxed text-foreground mb-6 flex-1">
                   "{testimonial.quote}"
                 </p>
-                <footer className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-muted flex-shrink-0 flex items-center justify-center text-sm font-medium text-muted-foreground">
-                    {testimonial.name.split(" ").map((n) => n[0]).join("")}
+                <footer className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-muted flex-shrink-0 overflow-hidden flex items-center justify-center text-sm font-medium text-muted-foreground">
+                    {testimonial.avatar ? (
+                      <img src={testimonial.avatar} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      testimonial.name.split(" ").map((n) => n[0]).join("")
+                    )}
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="font-medium text-sm">{testimonial.name}</div>
-                    <div className="text-muted-foreground text-xs truncate">
-                      {testimonial.title}
+                    <div className="text-muted-foreground text-xs leading-snug break-words">
+                      {testimonial.title.includes(" @ ")
+                        ? testimonial.title.split(" @ ")[0].trim()
+                        : testimonial.title}
                     </div>
+                    {testimonial.company && (
+                      <div className="text-muted-foreground text-xs leading-snug break-words">
+                        @ {testimonial.company}
+                      </div>
+                    )}
                   </div>
                 </footer>
               </motion.blockquote>

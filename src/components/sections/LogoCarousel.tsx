@@ -2,7 +2,13 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
-const logos = [
+const logos: { name: string; src: string; className: string; heightClass?: string }[] = [
+  {
+    name: "WeAreReasonablePeople",
+    src: "https://cdn.prod.website-files.com/661e812ebdc3422a64029d2e/661e812ebdc3422a64029e49_warplogo.svg",
+    className: "logo-brand",
+    heightClass: "h-8 sm:h-9 md:h-10",
+  },
   {
     name: "ANWB",
     src: "https://static.anwb.nl/poncho/navigation/images/logo.svg",
@@ -10,8 +16,9 @@ const logos = [
   },
   {
     name: "Unilever",
-    src: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Unilever_logo.png",
+    src: "https://www.unilever.nl/core-assets/logos/logo-animated.svg",
     className: "logo-brand",
+    heightClass: "h-12 sm:h-14 md:h-16",
   },
   {
     name: "Wolters Kluwer",
@@ -51,7 +58,7 @@ export function LogoCarousel() {
               <img
                 src={logo.src}
                 alt={logo.name}
-                className={`h-6 sm:h-7 md:h-8 w-auto max-w-[90px] sm:max-w-[120px] md:max-w-[150px] object-contain ${logo.className} select-none pointer-events-none transition-opacity duration-300 hover:opacity-80`}
+                className={`${logo.heightClass ?? "h-6 sm:h-7 md:h-8"} w-auto max-w-[90px] sm:max-w-[120px] md:max-w-[150px] object-contain ${logo.className} select-none pointer-events-none transition-opacity duration-300 hover:opacity-80`}
                 draggable={false}
               />
             </div>

@@ -117,22 +117,22 @@ export function Header() {
               </Button>
             </motion.div>
 
-            {/* Theme toggle */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            {/* Theme toggle — min 44px touch target on mobile (WCAG 2.5.5) */}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center justify-center">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsDark(!isDark)}
-                className="h-8 w-8 sm:h-9 sm:w-9 rounded-full hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="h-9 w-9 min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 rounded-full hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
             </motion.div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button — min 44px touch target (WCAG 2.5.5) */}
             <motion.button
-              className="sm:hidden h-8 w-8 flex items-center justify-center rounded-full hover:bg-accent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="sm:hidden flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full hover:bg-accent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
               whileTap={{ scale: 0.95 }}
@@ -169,7 +169,7 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors duration-150 cursor-pointer relative z-10 active:bg-accent"
+                    className="flex items-center min-h-[44px] px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors duration-150 cursor-pointer relative z-10 active:bg-accent"
                     onClick={handleClick}
                   >
                     {link.label}

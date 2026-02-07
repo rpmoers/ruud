@@ -74,8 +74,8 @@ export function PasswordGate({ children, password }: PasswordGateProps) {
             <h1 className="text-xl sm:text-2xl font-semibold tracking-tight mb-2 text-center">
               Portfolio Protected
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground text-center">
-              Please enter the password to access this portfolio
+            <p id="password-gate-hint" className="text-xs sm:text-sm text-muted-foreground text-center">
+              Please enter the password to access this portfolio. Request the password via LinkedIn.
             </p>
           </div>
 
@@ -89,8 +89,9 @@ export function PasswordGate({ children, password }: PasswordGateProps) {
                   setError(false);
                 }}
                 placeholder="Enter password"
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
                 autoFocus
+                aria-describedby="password-gate-hint"
               />
               {error && (
                 <motion.p
