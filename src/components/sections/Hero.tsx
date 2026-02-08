@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { getPortfolioData } from "@/data/portfolio";
 
@@ -8,16 +9,29 @@ export function Hero() {
   const { personal, sections } = data;
 
   return (
-    <section className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-12">
+    <section className="hero-section min-h-[70vh] flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-12">
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Main headline — Google-style large, clean text */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground leading-[1.15] mb-5">
-            {personal.tagline}
+          {/* Main headline — two lines: both scroll in sync (large at top, small after scroll) */}
+          <h1 className="hero-headline tracking-[-0.02em] leading-[1.15] mb-5 overflow-visible">
+            {personal.taglineLine1 && personal.taglineLine2 ? (
+              <>
+                <span className="block font-medium text-foreground hero-line1-scroll">
+                  {personal.taglineLine1}
+                </span>
+                <span className="block font-semibold hero-gradient-text hero-line2-scroll mt-1">
+                  {personal.taglineLine2}
+                </span>
+              </>
+            ) : (
+              <span className="text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground">
+                {personal.tagline}
+              </span>
+            )}
           </h1>
 
           {/* Description */}
@@ -41,8 +55,8 @@ export function Hero() {
           >
             <motion.a
               href="#work"
-              className="inline-flex items-center justify-center h-12 px-6 sm:px-8 text-sm font-medium bg-primary text-primary-foreground rounded-full shadow-sm"
-              whileHover={{ scale: 1.02, boxShadow: "0 4px 12px rgba(26,115,232,0.3)" }}
+              className="hero-cta-primary inline-flex items-center justify-center h-12 px-6 sm:px-8 text-sm font-medium rounded-full shadow-sm"
+              whileHover={{ scale: 1.02, boxShadow: "0 4px 12px rgba(99,57,219,0.35)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 500, damping: 25 }}
             >
@@ -52,12 +66,14 @@ export function Hero() {
               href={personal.links.linkedin || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 px-6 sm:px-8 text-sm font-medium text-primary border border-border rounded-full hover:bg-accent"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 sm:px-8 text-sm font-medium text-primary border border-border rounded-full hover:bg-accent"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 500, damping: 25 }}
+              aria-label="LinkedIn (opens in new tab)"
             >
               LinkedIn
+              <ExternalLink className="w-4 h-4 shrink-0" aria-hidden />
             </motion.a>
           </motion.div>
         </motion.div>

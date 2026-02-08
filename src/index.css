@@ -24,6 +24,7 @@
   --border: #e8eaed;
   --input: #e8eaed;
   --ring: #1a73e8;
+  --about-heading-inactive: #b8bcc4;
 }
 
 /* Google Store-inspired — dark mode */
@@ -47,6 +48,8 @@
   --border: #3c4043;
   --input: #3c4043;
   --ring: #8ab4f8;
+  /* Dark: inactive lines a bit dimmer so active (foreground) pops; still light enough to read */
+  --about-heading-inactive: #9ca3af;
 }
 
 @theme inline {
@@ -194,6 +197,140 @@ body {
   .transition-google {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Hero second line: gradient text — pink → purple → teal (daisyUI-style) */
+  .hero-gradient-text {
+    display: inline-block;
+    padding-bottom: 0.12em; /* prevent descenders (e.g. 'g') from being clipped */
+    background: linear-gradient(90deg, #F00066 0%, #9933CC 50%, #00BBEA 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .dark .hero-gradient-text {
+    background: linear-gradient(90deg, #f472b6 0%, #a78bfa 50%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hero headline: scroll progress 0 = top (line1 small, line2 big), 1 = after scroll (both same size) */
+  @property --hero-line2-scale {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  /* Line1: small at top → big at 420px (same as line2’s start size) */
+  .hero-line1-scroll {
+    font-size: calc(1rem + 0.875rem * var(--hero-line2-scale, 0));
+  }
+  @media (min-width: 640px) {
+    .hero-line1-scroll {
+      font-size: calc(1.125rem + 1.125rem * var(--hero-line2-scale, 0));
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-line1-scroll {
+      font-size: calc(1.5rem + 2.25rem * var(--hero-line2-scale, 0));
+    }
+  }
+  /* Line2: big at top → small at 420px (same as line1’s start size) */
+  .hero-line2-scroll {
+    font-size: calc(1.875rem - 0.875rem * var(--hero-line2-scale, 0));
+  }
+  @media (min-width: 640px) {
+    .hero-line2-scroll {
+      font-size: calc(2.25rem - 1.125rem * var(--hero-line2-scale, 0));
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-line2-scroll {
+      font-size: calc(3.75rem - 2.25rem * var(--hero-line2-scale, 0));
+    }
+  }
+  .hero-headline {
+    --hero-line2-scale: 0; /* at top: line1 small, line2 big */
+    /* Reserve space so scroll-driven font-size change doesn’t shift the CTA buttons */
+    min-height: 4.75rem;
+  }
+  @media (min-width: 640px) {
+    .hero-headline {
+      min-height: 5.75rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-headline {
+      min-height: 7rem;
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-headline {
+        animation: hero-headline-scroll linear;
+        animation-timeline: scroll(root block);
+        animation-range: 0px 420px;
+      }
+      @keyframes hero-headline-scroll {
+        0% { --hero-line2-scale: 0; }
+        100% { --hero-line2-scale: 1; }
+      }
+    }
+  }
+
+  /* Hero primary CTA — deep indigo-purple (daisyUI-style) */
+  .hero-cta-primary {
+    background: #6339DB;
+    color: #fff;
+  }
+  .hero-cta-primary:hover {
+    background: #5530c2;
+  }
+
+  /* About heading: 3 lines, scroll-down-driven color; lighter grey when inactive */
+  @property --about-line1-active {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --about-line2-active {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --about-line3-active {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  .about-heading-wrapper {
+    view-timeline-name: about-heading;
+    view-timeline-axis: block;
+  }
+  .about-heading-title {
+    font-weight: 700;
+  }
+  .about-heading-line1 {
+    color: color-mix(in srgb, var(--about-heading-inactive) calc((1 - var(--about-line1-active, 0)) * 100%), var(--foreground));
+  }
+  /* Lighter grey for inactive lines (--about-heading-inactive in root/dark below) */
+  .about-heading-line2 {
+    color: color-mix(in srgb, var(--about-heading-inactive) calc((1 - var(--about-line2-active, 0)) * 100%), var(--foreground));
+  }
+  .about-heading-line3 {
+    color: color-mix(in srgb, var(--about-heading-inactive) calc((1 - var(--about-line3-active, 0)) * 100%), var(--foreground));
+  }
+  /* --about-line1/2/3-active are set by JS scroll listener in About.tsx */
+}
+
+/* Testimonial card hover — CSS-only so it’s reliable; lift + shadow in both modes */
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+.testimonial-card:hover {
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
+}
+.dark .testimonial-card:hover {
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 /* Logo styling — original colors, readable in both modes */

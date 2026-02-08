@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { ExternalLink } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { getPortfolioData } from "@/data/portfolio";
 
@@ -46,11 +47,13 @@ export function Contact() {
                 href={personal.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors text-sm"
                 whileHover={{ y: -1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                aria-label="LinkedIn (opens in new tab)"
               >
                 LinkedIn
+                <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden />
               </motion.a>
             )}
             <span className="text-border">·</span>

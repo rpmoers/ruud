@@ -60,6 +60,9 @@ export interface PortfolioData {
     name: string;
     title: string;
     tagline: string;
+    /** First line of hero (smaller); second line uses taglineLine2 (larger + gradient). */
+    taglineLine1?: string;
+    taglineLine2?: string;
     bio: string;
     location: string;
     email: string;
@@ -81,6 +84,9 @@ export interface PortfolioData {
     selectedWork: string;
     featuredProjects: string;
     aboutHeading: string;
+    aboutHeadingLine1?: string;
+    aboutHeadingLine2?: string;
+    aboutHeadingLine3?: string;
     experienceHeading: string;
     testimonialsLabel: string;
     testimonialsHeading: string;
@@ -118,6 +124,8 @@ const nl: PortfolioData = {
     name: "Ruud Moers",
     title: "Senior UX Designer",
     tagline: "Heldere, relevante en impactvolle gebruikerservaringen",
+    taglineLine1: "Heldere, relevante en impactvolle",
+    taglineLine2: "gebruikerservaringen",
     bio: "Ik ben een ervaren designer die streeft naar het creëren van heldere, relevante en impactvolle gebruikerservaringen. De afgelopen jaren werkte ik bij WeAreReasonablePeople, Wolters Kluwer, Unilever en ANWB aan diverse digitale producten, zowel in-house als aan bureauzijde. Ik werk doelgericht en met oog voor detail, waarbij de gebruiker altijd centraal staat.",
     location: "Randstad, Nederland",
     email: "rpmoers@gmail.com",
@@ -146,6 +154,9 @@ const nl: PortfolioData = {
     selectedWork: "Geselecteerd werk",
     featuredProjects: "Projecten",
     aboutHeading: "Ervaringen ontwerpen die gebruikersbehoeften en bedrijfsdoelen in balans brengen.",
+    aboutHeadingLine1: "Ervaringen ontwerpen die",
+    aboutHeadingLine2: "gebruikersbehoeften en bedrijfsdoelen",
+    aboutHeadingLine3: "in balans brengen.",
     experienceHeading: "Ervaring",
     testimonialsLabel: "Aanbevelingen",
     testimonialsHeading: "Wat collega's zeggen",
@@ -529,7 +540,7 @@ const nl: PortfolioData = {
       name: "Nazar Dalyk",
       title: "User Experience Designer @ Trinetix",
       company: "Trinetix",
-      avatar: "https://media.licdn.com/dms/image/v2/C4D03AQHFfwYM7YjzMg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1563386172367?e=1772064000&v=beta&t=Y-n7wqZzVyXUOt8m4qt7ph7OzADNuIk_ZlHMNAliaQ0",
+      avatar: "/images/testimonials/nazar.jpg",
       linkedIn: "https://www.linkedin.com/in/nazar-dalyk-44b741106",
       quote:
         "Ruud is a highly skilled designer and a great teammate. He consistently brings fresh ideas to our brainstorming sessions. With strong attention to detail and excellent problem-solving skills, he always delivers high-quality work. Beyond his technical abilities, Ruud is supportive and always ready to help. He's a true team player who makes collaboration easy and enjoyable. It's been a pleasure working with him!",
@@ -539,7 +550,7 @@ const nl: PortfolioData = {
       name: "Yara Jalal",
       title: "Business Group Agile Lead @ Unilever",
       company: "Unilever",
-      avatar: "https://media.licdn.com/dms/image/v2/D4E03AQG3_qTLCShwLQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731306871070?e=1772064000&v=beta&t=c9xaOXXqEG1zMRM98lxAjdhurERtqoFLzjgDOgUEk2k",
+      avatar: "/images/testimonials/yara.jpg",
       linkedIn: "https://www.linkedin.com/in/yara-jalal-92a2ab94",
       quote:
         "I've had the pleasure of working closely with Ruud on several challenging projects over the past years. Ruud is a very optimistic and fun person with a can-do attitude that is contagious. I've learned a great deal from Ruud about user research, personas, testing with tools like Hotjar and creating prototypes. He uses his passion for user-centricity and understanding of the business needs to demonstrate the value of design thinking.",
@@ -549,7 +560,7 @@ const nl: PortfolioData = {
       name: "Adriaan Oudijk",
       title: "Design Research Lead",
       company: "Volksbank",
-      avatar: "https://media.licdn.com/dms/image/v2/D4E03AQE41O7FSLYOoA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714234471610?e=1772064000&v=beta&t=P6Vsm8d57_73n9ovlqjNAQpjxfEdgwCVR-pBB5Gsf6g",
+      avatar: "/images/testimonials/adriaan.jpg",
       quote:
         "Ruud is really good at solving wicked problems. He's an excellent UX Designer with the ability to deliver mindblowing graphic designs. His nonchalant attitude made him seem lazy to me, at first. Later on I noticed that he's just extremely efficient at his work, which allows him to take full advantage of the \"do something else\"-fase in a creative process.",
     },
@@ -582,6 +593,8 @@ const en: PortfolioData = {
     name: "Ruud Moers",
     title: "Senior UX Designer",
     tagline: "Clear, relevant, and impactful user experiences",
+    taglineLine1: "Clear, relevant, and impactful",
+    taglineLine2: "user experiences",
     bio: "I'm an experienced designer who strives to create clear, relevant, and impactful user experiences. In recent years, I've worked at WeAreReasonablePeople, Wolters Kluwer, Unilever, and ANWB on various digital products, both in-house and agency-side. I work purposefully and with an eye for detail, with the user always at the center.",
     location: "Randstad, Netherlands",
     email: "rpmoers@gmail.com",
@@ -610,6 +623,9 @@ const en: PortfolioData = {
     selectedWork: "Selected Work",
     featuredProjects: "Projects",
     aboutHeading: "Designing experiences that balance user needs with business goals.",
+    aboutHeadingLine1: "Designing experiences that",
+    aboutHeadingLine2: "balance user needs with",
+    aboutHeadingLine3: "business goals.",
     experienceHeading: "Where I've worked",
     testimonialsLabel: "Testimonials",
     testimonialsHeading: "What colleagues say",
@@ -993,7 +1009,7 @@ const en: PortfolioData = {
       name: "Nazar Dalyk",
       title: "User Experience Designer @ Trinetix",
       company: "Trinetix",
-      avatar: "https://media.licdn.com/dms/image/v2/C4D03AQHFfwYM7YjzMg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1563386172367?e=1772064000&v=beta&t=Y-n7wqZzVyXUOt8m4qt7ph7OzADNuIk_ZlHMNAliaQ0",
+      avatar: "/images/testimonials/nazar.jpg",
       linkedIn: "https://www.linkedin.com/in/nazar-dalyk-44b741106",
       quote:
         "Ruud is a highly skilled designer and a great teammate. He consistently brings fresh ideas to our brainstorming sessions. With strong attention to detail and excellent problem-solving skills, he always delivers high-quality work. Beyond his technical abilities, Ruud is supportive and always ready to help. He's a true team player who makes collaboration easy and enjoyable. It's been a pleasure working with him!",
@@ -1003,7 +1019,7 @@ const en: PortfolioData = {
       name: "Yara Jalal",
       title: "Business Group Agile Lead @ Unilever",
       company: "Unilever",
-      avatar: "https://media.licdn.com/dms/image/v2/D4E03AQG3_qTLCShwLQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731306871070?e=1772064000&v=beta&t=c9xaOXXqEG1zMRM98lxAjdhurERtqoFLzjgDOgUEk2k",
+      avatar: "/images/testimonials/yara.jpg",
       linkedIn: "https://www.linkedin.com/in/yara-jalal-92a2ab94",
       quote:
         "I've had the pleasure of working closely with Ruud on several challenging projects over the past years. Ruud is a very optimistic and fun person with a can-do attitude that is contagious. I've learned a great deal from Ruud about user research, personas, testing with tools like Hotjar and creating prototypes. He uses his passion for user-centricity and understanding of the business needs to demonstrate the value of design thinking.",
@@ -1013,7 +1029,7 @@ const en: PortfolioData = {
       name: "Adriaan Oudijk",
       title: "Design Research Lead",
       company: "Volksbank",
-      avatar: "https://media.licdn.com/dms/image/v2/D4E03AQE41O7FSLYOoA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714234471610?e=1772064000&v=beta&t=P6Vsm8d57_73n9ovlqjNAQpjxfEdgwCVR-pBB5Gsf6g",
+      avatar: "/images/testimonials/adriaan.jpg",
       quote:
         "Ruud is really good at solving wicked problems. He's an excellent UX Designer with the ability to deliver mindblowing graphic designs. His nonchalant attitude made him seem lazy to me, at first. Later on I noticed that he's just extremely efficient at his work, which allows him to take full advantage of the \"do something else\"-fase in a creative process.",
     },

@@ -38,6 +38,13 @@ export function PasswordGate({ children, password }: PasswordGateProps) {
     }
   }, []);
 
+  // When showing the portfolio (after login or restore), scroll to top so the page isn’t pre-scrolled
+  useEffect(() => {
+    if (isAuthenticated) {
+      window.scrollTo(0, 0);
+    }
+  }, [isAuthenticated]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputPassword === password) {

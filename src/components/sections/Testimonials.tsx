@@ -1,15 +1,25 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { getPortfolioData } from "@/data/portfolio";
 
 export function Testimonials() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isSectionInView = useInView(ref, { once: false, margin: "-80px" });
+  const [hasRevealed, setHasRevealed] = useState(false);
   const { language } = useLanguage();
   const data = getPortfolioData(language);
   const { testimonials, sections } = data;
+
+  useEffect(() => {
+    if (isSectionInView) setHasRevealed(true);
+  }, [isSectionInView]);
+
+  const headingParts = sections.testimonialsHeading.split(/(\s+)/);
+  const wordCount = headingParts.filter((p) => p.trim()).length;
+  const WORD_DURATION = 0.5;
+  const WORD_DELAY = 0.16;
 
   if (testimonials.length === 0) return null;
 
@@ -19,12 +29,36 @@ export function Testimonials() {
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Section header */}
+          {/* Section header — words appear one by one when section in view, reverse when scrolling up */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-[-0.02em] mb-10 sm:mb-14">
-            {sections.testimonialsHeading}
+            {headingParts.map((part, i) => {
+              if (!part.trim()) return <span key={i}>{part}</span>;
+              const wordIndex = headingParts.slice(0, i).filter((p) => p.trim()).length;
+              return (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={
+                    isSectionInView
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 8 }
+                  }
+                  transition={{
+                    duration: WORD_DURATION,
+                    delay: isSectionInView
+                      ? wordIndex * WORD_DELAY
+                      : (wordCount - 1 - wordIndex) * WORD_DELAY,
+                    ease: [0.4, 0, 0.2, 1],
+                  }}
+                  className="inline-block"
+                >
+                  {part}
+                </motion.span>
+              );
+            })}
           </h2>
 
           {/* Testimonials — Google-style cards */}
@@ -33,24 +67,37 @@ export function Testimonials() {
               <motion.blockquote
                 key={testimonial.id}
                 initial={{ opacity: 0, y: 16 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
                 transition={{
                   duration: 0.5,
                   delay: index * 0.1,
                   ease: [0.4, 0, 0.2, 1],
                 }}
-                className="bg-card rounded-2xl border border-border/60 p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+                className="testimonial-card bg-card rounded-2xl border border-border/60 p-6 shadow-sm transition-all duration-300 flex flex-col hover:border-border hover:bg-card/95 dark:hover:border-border dark:hover:bg-accent/50"
               >
                 <p className="text-sm leading-relaxed text-foreground mb-6 flex-1">
                   "{testimonial.quote}"
                 </p>
                 <footer className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-muted flex-shrink-0 overflow-hidden flex items-center justify-center text-sm font-medium text-muted-foreground">
-                    {testimonial.avatar ? (
-                      <img src={testimonial.avatar} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      testimonial.name.split(" ").map((n) => n[0]).join("")
+                  <div className="relative w-10 h-10 rounded-full bg-muted flex-shrink-0 overflow-hidden flex items-center justify-center text-sm font-medium text-muted-foreground">
+                    {testimonial.avatar && (
+                      <img
+                        src={testimonial.avatar}
+                        alt=""
+                        className="w-full h-full object-cover absolute inset-0"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                          const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.style.display = "flex";
+                        }}
+                      />
                     )}
+                    <span
+                      className="w-full h-full flex items-center justify-center"
+                      style={{ display: testimonial.avatar ? "none" : "flex" }}
+                    >
+                      {testimonial.name.split(" ").map((n) => n[0]).join("")}
+                    </span>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="font-medium text-sm">{testimonial.name}</div>

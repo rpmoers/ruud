@@ -4,12 +4,6 @@ import { useRef } from "react";
 
 const logos: { name: string; src: string; className: string; heightClass?: string }[] = [
   {
-    name: "WeAreReasonablePeople",
-    src: "https://cdn.prod.website-files.com/661e812ebdc3422a64029d2e/661e812ebdc3422a64029e49_warplogo.svg",
-    className: "logo-brand",
-    heightClass: "h-8 sm:h-9 md:h-10",
-  },
-  {
     name: "ANWB",
     src: "https://static.anwb.nl/poncho/navigation/images/logo.svg",
     className: "logo-brand",
@@ -24,6 +18,12 @@ const logos: { name: string; src: string; className: string; heightClass?: strin
     name: "Wolters Kluwer",
     src: "https://cdn.wolterskluwer.io/wk/jumpstart-v3-assets/0.x.x/logo/large.svg",
     className: "logo-brand",
+  },
+  {
+    name: "WeAreReasonablePeople",
+    src: "https://cdn.prod.website-files.com/661e812ebdc3422a64029d2e/661e812ebdc3422a64029e49_warplogo.svg",
+    className: "logo-brand",
+    heightClass: "h-8 sm:h-9 md:h-10",
   },
   {
     name: "Peterson",
