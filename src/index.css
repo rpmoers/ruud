@@ -48,8 +48,8 @@
   --border: #3c4043;
   --input: #3c4043;
   --ring: #8ab4f8;
-  /* Dark: inactive lines a bit dimmer so active (foreground) pops; still light enough to read */
-  --about-heading-inactive: #9ca3af;
+  /* Dark: inactive lines very dark grey so active (foreground) clearly pops */
+  --about-heading-inactive: #4b5563;
 }
 
 @theme inline {

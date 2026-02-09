@@ -20,10 +20,10 @@ export function Hero() {
           <h1 className="hero-headline tracking-[-0.02em] leading-[1.15] mb-5 overflow-visible">
             {personal.taglineLine1 && personal.taglineLine2 ? (
               <>
-                <span className="block font-medium text-foreground hero-line1-scroll">
+                <span className="block font-semibold text-foreground hero-line1-scroll">
                   {personal.taglineLine1}
                 </span>
-                <span className="block font-semibold hero-gradient-text hero-line2-scroll mt-1">
+                <span className="block font-bold hero-gradient-text hero-line2-scroll mt-1">
                   {personal.taglineLine2}
                 </span>
               </>

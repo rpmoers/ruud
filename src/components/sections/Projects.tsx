@@ -537,9 +537,19 @@ export function Projects() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
                       {project.description}
                     </p>
+
+                    {/* Scale/Complexity hint */}
+                    {project.scale && (
+                      <div className="mb-4">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/80">
+                          <span className="w-1 h-1 rounded-full bg-muted-foreground/40"></span>
+                          {project.scale}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Only filterable pills (same as filter bar) */}
                     <ProjectCardTags filters={getFiltersForProject(project)} />
